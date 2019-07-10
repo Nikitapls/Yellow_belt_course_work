@@ -1,6 +1,6 @@
 #pragma once
 
-#include "node.cpp"
+#include "node.h"
 
 #include <memory>
 #include <iostream>

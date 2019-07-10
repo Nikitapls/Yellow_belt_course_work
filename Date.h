@@ -19,3 +19,6 @@ ostream& operator << (ostream &s, const Date &date);
 bool operator<(const Date& lhs, const Date& rhs);
 bool operator==(const Date& lhs, const Date& rhs);
 bool operator>(const Date& lhs, const Date& rhs);
+ostream& operator << (ostream &s, const pair<Date, string>& date);
+string ParseEvent(istream& is);
+Date ParseDate(istream& is);

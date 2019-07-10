@@ -1,7 +1,7 @@
 //#include "database.h"
 #include "date.h"
 #include "condition_parser.h"
-#include "node.cpp"
+#include "node.h"
 #include "test_runner.h"
 #include <sstream>
 #include<set>
@@ -12,6 +12,8 @@
 #include<string>
 #include<map>
 #include<iomanip>
+#include<memory>
+#include<utility>
 using namespace std;
 
 
@@ -41,7 +43,18 @@ public:
 		}
 	}
 	void RemoveIf();
-	void FindIf();
+	template <class predicate>
+	vector<pair<Date, string>> FindIf(predicate pred) { 
+		vector < pair<Date, string>> answer;
+		for ( auto it = date_evnt.begin(); it != date_evnt.end(); ++it) {
+			for (string str : it->second) {
+				if (pred(it->first, str)) {
+					answer.push_back(make_pair(it->first, str));
+				}
+			}
+		}
+		return answer;
+	}
 	void last();
 	map<Date, vector<string>> date_evnt;
 	map<string, set<Date>> evnt_date;
@@ -49,27 +62,7 @@ public:
 
 
 //Add 2017-01-01 New Year
-string ParseEvent(istream& is) {
-	// Реализуйте эту функцию
-	string evnt;
-	getline(is, evnt);
-	string answer(evnt.begin() + 1, evnt.end());
-	return answer;
-}
-Date ParseDate(istream& is) {//Add 2017-01-01 New Year   Год-Месяц-День
-	string data;
-	is >> data;
-	stringstream ss(data);
-	string par;
-	int year = -1, month = -1, day = -1;
-	for (int i = 0; i < 3; ++i) {
-		getline(ss, par, '-');
-		if (year == -1) { year = stoi(par); }
-		else if (month == -1) { month = stoi(par); }
-		else if (day == -1) { day = stoi(par); }
-	}
-	return{ year,month,day };
-}
+
 
 int main() {
   //TestAll();
@@ -116,7 +109,8 @@ int main() {
       } catch (invalid_argument&) {
           cout << "No entries" << endl;
       }*/
-    } else if (command.empty()) {
+    //}
+	else if (command.empty()) {
       continue;
     } else {
       throw logic_error("Unknown command: " + command);
