@@ -1,4 +1,8 @@
 //#pragma once
+//#include "database.h"
+//#include "date.h"
+//#include "condition_parser.h"
+//#include "node.h"	
 //#include <sstream>
 //#include <exception>
 //#include <iostream>
@@ -42,7 +46,7 @@
 //{
 //	if (t != u) {
 //		ostringstream os;
-//		os << "Assertion failed: " << t << " != " << u
+//		os << "Assertion failed: " << " != " << u
 //			<< " hint: " << hint;
 //		throw runtime_error(os.str());
 //	}

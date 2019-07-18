@@ -1,5 +1,11 @@
-#include"Date.h"
-#include<sstream>
+#include "date.h"
+
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <iomanip>
+
+using namespace std;
 //class Date {
 //public:
 Date::Date(int year_, int month_, int day_) :year(year_), month(month_), day(day_) {
@@ -15,6 +21,7 @@ Date::Date(int year_, int month_, int day_) :year(year_), month(month_), day(day
 //	const int month;
 //	const int day;
 //};
+
 ostream& operator << (ostream &s, const Date &date) {
 	s.fill('0');
 	s << setw(4) << date.year << '-' << setw(2) << date.month << '-' << setw(2) << date.day;
@@ -32,16 +39,17 @@ bool operator>(const Date& lhs, const Date& rhs){
 	return vector<int>{lhs.year, lhs.month, lhs.day} >
 		vector<int>{rhs.year, rhs.month, rhs.day};
 }
-ostream& operator << (ostream &s, const pair<Date,string>& date) {
-	s.fill('0');
-	s << setw(4) << date.first.year << '-' << setw(2) << date.first.month << '-' << setw(2) << date.first.day<<' '<<date.second;
-	return s;
-}
+
 string ParseEvent(istream& is) {
 	// Реализуйте эту функцию
+	
 	string evnt;
+	//getline(is, evnt);
+	while (is.peek() == ' ') {
+		 is.get();
+	}
 	getline(is, evnt);
-	string answer(evnt.begin() + 1, evnt.end());
+	string answer(evnt.begin(), evnt.end());
 	return answer;
 }
 Date ParseDate(istream& is) {//Add 2017-01-01 New Year   Год-Месяц-День

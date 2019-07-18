@@ -1,8 +1,7 @@
 #pragma once
-#include<memory>
-#include<string>
-#include<vector>
-#include"Date.h"
+
+#include "date.h"
+#include <memory>
 
 using namespace std;
 
